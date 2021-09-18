@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGOG DatePicker</title>
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="datepicker.css">
-  </head>
-  <body>
-    
-    <div><input type="text" data-date-picker></div>
-  <div><input type="text" data-date-picker></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGOG DatePicker</title>
 
-    <script src="./app.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="agogDatepicker.css">
+  <script src="agogDatepicker.js"></script>
+</head>
 
-  </body>
+<body>
+
+  <h1>AGOG<strong>DATEPICKER</strong> <span>[<a href="https://github.com/adnangog/agog-datepicker">GitHub</a>]</span></h1>
+
+  <div class="custom-container">
+    <input type="text" data-agog-date-picker value="01.01.2021">
+    <input type="text" data-agog-date-picker>
+  </div>
+
+  <script>
+    agogDatePicker.init();
+  </script>
+</body>
+
 </html>

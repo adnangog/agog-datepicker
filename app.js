@@ -40,17 +40,7 @@ function Month(options) {
     }
 
     month.getDay = Day({date: new Date(month.year, month.number - 1, dayNumber), lang:month.lang});
-
-    // month[Symbol.iterator] = function* () {
-    //     let number = 1;
-    //     yield getDay(number);
-    //     while (number < month.numberOfDays) {
-    //         ++number;
-    //         yield getDay(number);
-    //     }
-    // }
-
-
+    
     return month;
 }
 
@@ -367,25 +357,32 @@ function DatePicker(options) {
 
                 datePicker.render(e);
 
-                if (e.target.value) {
-                    let day = Day({date:stringToDate(e.target.value, datePicker.format), lang:datePicker.lang})
+                let day;
 
-                    if (isEqualTo(datePicker.date, day)) return;
-
-                    datePicker.date = day;
-
-                    if (day.monthNumber !== datePicker.calendar.month.number) {
-                        datePicker.prevMonth();
-                    } else {
-                        let el = document.querySelector("button[aria-label='" + e.target.value + "']");
-
-                        el.classList.add('selected');
-                        datePicker.selectedDayElement.classList.remove('selected');
-                        datePicker.selectedDayElement = el;
-                    }
-
-                    datePicker.updateToggleText();
+                if (e.target.value){
+                    day = Day({date:stringToDate(e.target.value, datePicker.format), lang:datePicker.lang});
                 }
+                else{
+                    day = Day(new Date());
+                }
+
+                if (isEqualTo(datePicker.date, day)) return;
+
+                datePicker.date = day;
+
+                
+                if (day.monthNumber !== datePicker.calendar.month.number) {
+                    datePicker.calendar.goToDate(day.monthNumber,day.year);
+                    datePicker.render(e);
+                } else {
+                    let el = document.querySelector("button[aria-label='" + dayFormat(datePicker.date, datePicker.format) + "']");
+
+                    el.classList.add('selected');
+                    datePicker.selectedDayElement.classList.remove('selected');
+                    datePicker.selectedDayElement = el;
+                }
+
+                datePicker.updateToggleText();
 
 
             })
